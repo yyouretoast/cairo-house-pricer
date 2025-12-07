@@ -12,7 +12,7 @@ This project solves the problem of vague real estate pricing in Cairo. By analyz
 * **Data Processing:** Pandas, NumPy
 * **Deployment:** Streamlit, Docker, HuggingFace Space
 
-## 📊 Model Performance
+## Model
 * **Algorithm:** Random Forest
 * **Training Data:** Real Egyptian property listings
 * **Accuracy:** About 70% R^2 score on unseen test data
