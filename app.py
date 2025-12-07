@@ -6,7 +6,7 @@ import numpy as np
 st.set_page_config(page_title="Cairo Real Estate Estimator", page_icon="🏠")
 
 st.title("🏠 Cairo House Price Predictor")
-st.write("Enter the property details below to get a price estimate.")
+st.write("Enter the property's details to get a price estimate.")
 
 # load artifacts
 @st.cache_resource
@@ -19,7 +19,7 @@ def load_artifacts():
 try:
     model, loc_encoder, type_encoder = load_artifacts()
 except FileNotFoundError:
-    st.error("⚠️ Artifacts not found! Did you run train_model.py?")
+    st.error("Artifacts not found.")
     st.stop()
 
 # input
@@ -45,7 +45,7 @@ locations = loc_encoder.classes_
 selected_location = st.selectbox("Location", locations)
 
 # prediction
-if st.button("Predict Price 🚀", type="primary"):
+if st.button("Predict Price", type="primary"):
     
 
     loc_encoded = loc_encoder.transform([selected_location])[0]
@@ -59,8 +59,8 @@ if st.button("Predict Price 🚀", type="primary"):
     
     # result
     st.markdown("---")
-    st.subheader(f"💰 Estimated Price: {prediction:,.0f} EGP")
+    st.subheader(f"Estimated Price: {prediction:,.0f} EGP")
     
     # price per meter
     price_per_meter = prediction / size_sqm
-    st.caption(f"That is approximately {price_per_meter:,.0f} EGP per sqm.")
+    st.caption(f"Approximately {price_per_meter:,.0f} EGP per sqm.")

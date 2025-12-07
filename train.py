@@ -72,7 +72,7 @@ df['type_encoded'] = le_type.fit_transform(df['type'].astype(str))
 X = df[['size_sqm', 'bedrooms', 'bathrooms', 'location_encoded', 'type_encoded']]
 y = df['price']
 
-print(f" Training on {len(df)} clean rows...")
+print(f" Training on {len(df)} rows...")
 
 # train
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -85,9 +85,9 @@ score = model.score(X_test, y_test)
 print(f" Model R^2 Score (Accuracy): {score:.2f}")
 
 # save
-print(" Saving model and encoders...")
+print("Saving model and encoders...")
 joblib.dump(model, 'cairo_house_model.pkl', compress=3)
 joblib.dump(le_location, 'location_encoder.pkl')
 joblib.dump(le_type, 'type_encoder.pkl')
 
-print("Done! Files saved: cairo_house_model.pkl, location_encoder.pkl, type_encoder.pkl")
+print("Saved files")
