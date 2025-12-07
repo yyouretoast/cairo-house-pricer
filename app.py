@@ -2,27 +2,65 @@ import streamlit as st
 import joblib
 import numpy as np
 
-model = joblib.load('cairo_house_model.pkl')
+# setup
+st.set_page_config(page_title="Cairo Real Estate Estimator", page_icon="🏠")
 
 st.title("🏠 Cairo House Price Predictor")
-st.write("Enter the details of the apartment to estimate its price.")
+st.write("Enter the property details below to get a price estimate.")
 
-area = st.number_input("Area (in square meters)", min_value=50, max_value=1000, value=120)
-bedrooms = st.slider("Number of Bedrooms", min_value=1, max_value=10, value=3)
+# load artifacts
+@st.cache_resource
+def load_artifacts():
+    model = joblib.load('cairo_house_model.pkl')
+    loc_encoder = joblib.load('location_encoder.pkl')
+    type_encoder = joblib.load('type_encoder.pkl')
+    return model, loc_encoder, type_encoder
 
-location_option = st.selectbox(
-    "Location",
-    ("Nasr City", "Maadi", "New Cairo")
-)
+try:
+    model, loc_encoder, type_encoder = load_artifacts()
+except FileNotFoundError:
+    st.error("⚠️ Artifacts not found! Did you run train_model.py?")
+    st.stop()
 
-location_mapping = {"Nasr City": 0, "Maadi": 1, "New Cairo": 2}
-location_code = location_mapping[location_option]
+# input
+col1, col2 = st.columns(2)
 
-# predict
-if st.button("Predict Price"):
+with col1:
+    # Area (Sqm)
+    size_sqm = st.number_input("Area (in sqm)", min_value=30, max_value=2000, value=120)
+    # Bedrooms
+    bedrooms = st.slider("Bedrooms", min_value=1, max_value=10, value=3)
 
-    features = np.array([[area, bedrooms, location_code]])
+with col2:
+    # Bathrooms
+    bathrooms = st.slider("Bathrooms", min_value=1, max_value=8, value=2)
+    # Property Type
+
+    prop_types = type_encoder.classes_
+    selected_type = st.selectbox("Property Type", prop_types)
+
+# Location
+
+locations = loc_encoder.classes_
+selected_location = st.selectbox("Location", locations)
+
+# prediction
+if st.button("Predict Price 🚀", type="primary"):
     
+
+    loc_encoded = loc_encoder.transform([selected_location])[0]
+    type_encoded = type_encoder.transform([selected_type])[0]
+    
+
+    features = np.array([[size_sqm, bedrooms, bathrooms, loc_encoded, type_encoded]])
+    
+    # run
     prediction = model.predict(features)[0]
-    # display in egp
-    st.success(f"Estimated Price: **{prediction:,.0f} EGP**")
+    
+    # result
+    st.markdown("---")
+    st.subheader(f"💰 Estimated Price: {prediction:,.0f} EGP")
+    
+    # price per meter
+    price_per_meter = prediction / size_sqm
+    st.caption(f"That is approximately {price_per_meter:,.0f} EGP per sqm.")
