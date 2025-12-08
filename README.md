@@ -7,15 +7,15 @@ End-to-end ML pipeline that predicts real estate prices in Cairo, Egypt.
 This project solves the problem of vague real estate pricing in Cairo. By analyzing thousands of listings, the model estimates market value based on area, location, and finishing type.
 
 ## Stack
-* **Core:** Python 3
-* **ML:** Scikit-Learn
-* **Data Processing:** Pandas, NumPy
-* **Deployment:** Streamlit, Docker, HuggingFace Space
+- **Core:** Python 3
+- **ML:** Scikit-Learn
+- **Data Processing:** Pandas, NumPy
+- **Deployment:** Streamlit, Docker, HuggingFace Space
 
 ## Model
-* **Algorithm:** Random Forest
-* **Training Data:** Real Egyptian property listings
-* **Accuracy:** About 70% R^2 score on unseen test data
+- **Algorithm:** Random Forest
+- **Training Data:** Egyptian property listings
+- **Accuracy:** About 70% R^2 score on unseen test data
 
 ## If you'd like to run this locally:
 ```
