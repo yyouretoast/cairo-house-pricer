@@ -7,7 +7,7 @@
 End-to-end ML pipeline that estimates real estate prices in Cairo, Egypt.
 
 **Live Demo: (https://huggingface.co/spaces/yyouretoast/cairo-house-pricer)**
-![App Interface](image.png)
+<img src="image.png" width="400" alt="App Interface">
 ## Overview
 This project solves the problem of vague real estate pricing in Cairo. By analyzing thousands of listings, the model estimates market value based on area, location, and finishing type.
 
