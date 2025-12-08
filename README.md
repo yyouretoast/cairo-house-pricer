@@ -19,7 +19,7 @@ This project solves the problem of vague real estate pricing in Cairo. By analyz
 
 ## If you'd like to run this locally:
 ```
-git clone [https://github.com/yyouretoast/cairo-house-pricer.git](https://github.com/yyouretoast/cairo-house-pricer.git)
+git clone https://github.com/yyouretoast/cairo-house-pricer.git
 cd cairo-house-pricer
 pip install -r requirements.txt
 streamlit run app.py
