@@ -1,6 +1,6 @@
 # Cairo House Price Predictor
 
-End-to-end ML pipeline that predicts real estate prices in Cairo, Egypt.
+End-to-end ML pipeline that estimates real estate prices in Cairo, Egypt.
 **Try the live app here! : (https://huggingface.co/spaces/yyouretoast/cairo-house-pricer)**
 
 ## Overview
@@ -20,5 +20,6 @@ This project solves the problem of vague real estate pricing in Cairo. By analyz
 ## If you'd like to run this locally:
 ```
 git clone [https://github.com/yyouretoast/cairo-house-pricer.git](https://github.com/yyouretoast/cairo-house-pricer.git)
+cd cairo-house-pricer
 pip install -r requirements.txt
 streamlit run app.py
